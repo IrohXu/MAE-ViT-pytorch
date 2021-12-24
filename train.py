@@ -50,10 +50,10 @@ def train():
 
 
     train_dataset = TusimpleMAE(train_dataset_file, transform=data_transforms['train'])
-    train_loader = DataLoader(train_dataset, batch_size=2, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 
     val_dataset = TusimpleMAE(val_dataset_file, transform=data_transforms['val'])
-    val_loader = DataLoader(val_dataset, batch_size=2, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=True)
 
     dataloaders = {
         'train' : train_loader,
@@ -66,7 +66,7 @@ def train():
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-    model, log = train_mae(model, optimizer, scheduler=None, dataloaders=dataloaders, dataset_sizes=dataset_sizes, device=DEVICE, num_epochs=5)
+    model, log = train_mae(model, optimizer, scheduler=None, dataloaders=dataloaders, dataset_sizes=dataset_sizes, device=DEVICE, num_epochs=10)
     df=pd.DataFrame({'epoch':[],'training_loss':[],'val_loss':[]})
     df['epoch'] = log['epoch']
     df['training_loss'] = log['training_loss']

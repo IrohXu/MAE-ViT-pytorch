@@ -506,6 +506,7 @@ class MAE(nn.Module):
         # self.encoder = torch.nn.Sequential( *( list(encoder.children())[:-1] ) )   # 576 * 768
         
         self.encoder = VisionTransformer(img_size=384, patch_size=16, in_chans=3)
+        self.encoder = vit_base_patch16_384(pretrained=True)
         
         self.decoder = MAEDecoder(img_size=384, patch_size=16, in_chans=3)
         
